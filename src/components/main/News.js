@@ -23,7 +23,10 @@ export class News extends Component {
 		axios
 			.get(`https://newsapi.org/v2/everything?q=${this.state.searchText}&apiKey=${process.env.REACT_APP_API_KEY}`)
 			.then((response) => {
-				this.setState({ news: response.data.articles, heading: 'Search Results' });
+				this.setState({
+					news: response.data.articles,
+					heading: `Search Results (${response.data.articles.length})`
+				});
 			})
 			.catch((err) => console.log(err));
 	};
@@ -47,7 +50,7 @@ export class News extends Component {
 								type="text"
 								className="form-control"
 								name="searchText"
-								placeholder="Search News..."
+								placeholder="Search for related terms such as country, news source, or currency etc..."
 								value={searchText}
 								onChange={this.onChange}
 							/>
